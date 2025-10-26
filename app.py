@@ -9,7 +9,6 @@ if st.button("Search"):
     headers = {"X-API-KEY": st.secrets["SERPER_KEY"]}
     body = {
         "q": f"site:(naukri.com OR indeed.co.in OR linkedin.com/jobs OR foundit.in) {query} 'apply now' 'posted today'",
-,
     }
     r = requests.post("https://google.serper.dev/search", headers=headers, json=body)
     data = r.json().get("organic", [])
