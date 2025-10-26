@@ -3,14 +3,13 @@ import streamlit as st, requests, pandas as pd
 st.set_page_config(page_title="Job Finder", layout="wide")
 st.title("🌐 Advanced Job Finder")
 
-query = st.text_input("Enter job title / skills / location", "python developer Bengaluru")
+query = st.text_input("Enter job title / skills / location", "Data Analyst Bengaluru")
 
 if st.button("Search"):
     headers = {"X-API-KEY": st.secrets["SERPER_KEY"]}
     body = {
-        "q": f"site:(naukri.com OR indeed.co.in OR foundit.in OR linkedin.com/jobs OR weworkremotely.com OR remotive.io OR upwork.com OR freelancer.in OR glassdoor.co.in OR shine.com OR timesjobs.com) {query}",
-        "num": 20,
-        "gl": "in",
+        "q": f"site:(naukri.com OR indeed.co.in OR linkedin.com/jobs OR foundit.in) {query} 'apply now' 'posted today'",
+,
     }
     r = requests.post("https://google.serper.dev/search", headers=headers, json=body)
     data = r.json().get("organic", [])
